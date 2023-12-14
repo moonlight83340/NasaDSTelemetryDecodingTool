@@ -2,6 +2,13 @@
 #include "DS-HK-Telemetry.h"
 #include <string>
 #include <vector>
+#include <cstring>
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+#include <chrono>
+#include <ctime>
+
 
 
 //Telemetry secondary Header Time in J2000 time format

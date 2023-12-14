@@ -1,10 +1,4 @@
 ﻿#include "DSHKTelemetryDecoder.h"
-#include <cstring>
-#include <iostream>
-#include <fstream>
-#include <iomanip>
-#include <chrono>
-#include <ctime>
 
 using namespace std;
 
@@ -180,4 +174,5 @@ int DSHKTelemetryDecoder::processBinaryFile() {
         packets.push_back(currentPacket);
     }
     file.close();
+    return 0;
 }
