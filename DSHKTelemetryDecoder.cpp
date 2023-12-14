@@ -1,4 +1,10 @@
 ﻿#include "DSHKTelemetryDecoder.h"
+#include <cstring>
+#include <iostream>
+#include <fstream>
+#include <iomanip>
+#include <chrono>
+
 using namespace std;
 
 DSHKTelemetryDecoder::DSHKTelemetryDecoder(const string& filePathp) {
