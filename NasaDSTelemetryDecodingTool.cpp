@@ -7,6 +7,7 @@
 #include <chrono>
 #include "DS-HK-Telemetry.h"
 #include "DSHKTelemetryDecoder.h"
+#include "Utils.h"
 
 using namespace std;
 
@@ -34,6 +35,7 @@ void showBinaryFileInHexa(const std::string& filePath) {
         }
     }
 }
+
 //
 ////Telemetry secondary Header Time in J2000 time format
 //struct TelemetrySecondaryHeaderTime {
@@ -207,6 +209,12 @@ void showBinaryFileInHexa(const std::string& filePath) {
 //        return 1;
 //    }
 int main() {
+    if (isLittleEndian()) {
+        std::cout << "CPU is little-endian." << std::endl;
+    }
+    else {
+        std::cout << "CPU is big-endian." << std::endl;
+    }
     string filePath = "C:/Users/perrotg/Documents/GitHub/NasaDSTelemetryDecodingTool/TestFile/ds_tlm.bin";
     DSHKTelemetryDecoder DSHKTelemetryDecoder(filePath);
     DSHKTelemetryDecoder.processBinaryFile();

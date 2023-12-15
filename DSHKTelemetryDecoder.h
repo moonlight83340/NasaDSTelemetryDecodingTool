@@ -1,4 +1,5 @@
-#pragma once
+#ifndef DSHK_TELEMETRY_DECODER_H
+#define DSHK_TELEMETRY_DECODER_H
 #include "DS-HK-Telemetry.h"
 #include <string>
 #include <vector>
@@ -33,4 +34,4 @@ private:
 	std::string filePath;
 	bool isBigEndian;
 };
-
+#endif //DSHK_TELEMETRY_DECODER_H

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef DS_HK_TELEMETRY_H
+#define DS_HK_TELEMETRY_H
+
 #include <stdint.h>
 /*
 ** Maximum length for an absolute path name
@@ -113,3 +115,4 @@ typedef struct
 
     DS_HkTlm_Payload_t Payload;
 } DS_HkPacket_t;
+#endif // DS_HK_TELEMETRY_H

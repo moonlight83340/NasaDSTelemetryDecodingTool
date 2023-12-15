@@ -1,4 +1,5 @@
 ﻿#include "DSHKTelemetryDecoder.h"
+#include "Utils.h"
 
 using namespace std;
 
@@ -148,7 +149,7 @@ int DSHKTelemetryDecoder::processBinaryFile() {
             //Assign secondary header packet readed
             currentPacket.TelemetryHeader.Sec = secondaryHeader;
         }
-        DS_HkTlm_Payload_t payload;
+        DS_HkTlm_Payload_t payload{0};
         if (buffer.size() >= (fileCursor + sizeof(DS_HkTlm_Payload_t))) {
             std::memcpy(&payload, buffer.data() + fileCursor, sizeof(DS_HkTlm_Payload_t));
             fileCursor += sizeof(DS_HkTlm_Payload_t);
@@ -159,6 +160,16 @@ int DSHKTelemetryDecoder::processBinaryFile() {
             std::cout << "FilterTblLoadCounter: " << static_cast<int>(payload.FilterTblLoadCounter) << std::endl;
             std::cout << "FilterTblErrCounter: " << static_cast<int>(payload.FilterTblErrCounter) << std::endl;
             std::cout << "AppEnableState: " << static_cast<int>(payload.AppEnableState) << std::endl;
+            if (isLittleEndian()) {
+                payload.FileWriteCounter = littleToBigEndian16(payload.FileWriteCounter);
+                payload.FileWriteErrCounter = littleToBigEndian16(payload.FileWriteErrCounter);
+                payload.FileUpdateCounter = littleToBigEndian16(payload.FileUpdateCounter);
+                payload.FileUpdateErrCounter = littleToBigEndian16(payload.FileUpdateErrCounter);
+                payload.DisabledPktCounter = littleToBigEndian32(payload.DisabledPktCounter);
+                payload.IgnoredPktCounter = littleToBigEndian32(payload.IgnoredPktCounter);
+                payload.FilteredPktCounter = littleToBigEndian32(payload.FilteredPktCounter);
+                payload.PassedPktCounter = littleToBigEndian32(payload.PassedPktCounter);
+            }
             std::cout << "FileWriteCounter: " << payload.FileWriteCounter << std::endl;
             std::cout << "FileWriteErrCounter: " << payload.FileWriteErrCounter << std::endl;
             std::cout << "FileUpdateCounter: " << payload.FileUpdateCounter << std::endl;

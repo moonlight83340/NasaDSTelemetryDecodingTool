@@ -23,10 +23,13 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DS-HK-Telemetry.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="DSHKTelemetryDecoder.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DS-HK-Telemetry.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
