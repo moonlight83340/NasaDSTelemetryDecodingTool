@@ -22,8 +22,15 @@ class DSHKTelemetryDecoder
 {
 public:
 	DSHKTelemetryDecoder(const std::string& filePathp);
+	//! Process the binary file to read the HK telemetry
+	/*!
+	  \fn int processBinaryFile()
+	  \return 0 if everything fine 1 if error
+	*/
 	int processBinaryFile();
 	std::vector<DS_HkPacket_t> getPackets();
+	void showPacket(DS_HkPacket_t packet);
+	void showPackets();
 private:
 	//Utility function could be from an another file
 	uint16_t ConvertToDecimal(uint8_t bytes[2]);
