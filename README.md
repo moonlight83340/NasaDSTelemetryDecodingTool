@@ -12,3 +12,8 @@ Headerで定義されている Timeの起点時間 (Epoch)は J2000.0 (2000-01-0
 DS application の version は 2.5.1、cFE の version は 6.5.0 とします
 実行環境が Little / Big endianどちらでも動作することを想定してくだ さい。ただし実際に Big Endian の環境で動作させる必要はありません
 ツールの使い方、動作環境の簡単な説明と、実行結果も添付してください
+
+## Usage :
+### ./NasaDSTelemetryDecodingTool binary < FilePath >
+### ./NasaDSTelemetryDecodingTool run < FilePath >
+FilePath is the path to the telemetry binary file.
