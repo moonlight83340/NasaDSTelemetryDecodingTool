@@ -17,3 +17,10 @@ DS application の version は 2.5.1、cFE の version は 6.5.0 とします
 ### ./NasaDSTelemetryDecodingTool binary < FilePath >
 ### ./NasaDSTelemetryDecodingTool run < FilePath >
 FilePath is the path to the telemetry binary file.
+
+### Result of ./NasaDSTelemetryDecodingTool binary < FilePath >
+![image](https://github.com/moonlight83340/NasaDSTelemetryDecodingTool/assets/6190795/fdca065e-4340-4f3a-a067-efd083687da3)
+
+### Result of ./NasaDSTelemetryDecodingTool run < FilePath >
+![image](https://github.com/moonlight83340/NasaDSTelemetryDecodingTool/assets/6190795/d9bcca3f-2ca0-4845-be2c-97047458ddd8)
+
