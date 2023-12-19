@@ -28,7 +28,7 @@ inline uint32_t littleToBigEndian32(uint32_t value) {
 //! Check if CPU little endian
 /*!
     \fn bool isLittleEndian()
-    \return true if cpu is little endian flase if it's big endian
+    \return true if cpu is little endian false if it's big endian
 */
 inline bool isLittleEndian() {
     uint32_t testValue = 0x12345678;
