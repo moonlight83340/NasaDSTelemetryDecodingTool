@@ -29,7 +29,7 @@ TelemetrySecondaryHeaderTime DSHKTelemetryDecoder::getTelemetrySecondaryHeaderTi
 
 // Get UTC Datestamp fron Telemetry secondary Header Time in J2000 time format
 std::tm DSHKTelemetryDecoder::getPacketDatestampInUtcTimeFromJ2000Time(uint32_t seconds, uint16_t subSeconds) {
-    // Date de départ en UTC avec millisecondes
+    // J2000.0 in UTC
     std::tm j2000_time = {};
     j2000_time.tm_year = 100;  // 2000 (years - 1900)
     j2000_time.tm_mon = 0;     // january (month 0-based)
@@ -38,19 +38,19 @@ std::tm DSHKTelemetryDecoder::getPacketDatestampInUtcTimeFromJ2000Time(uint32_t 
     j2000_time.tm_min = 58;
     j2000_time.tm_sec = 55;
 
-    // Ajouter les millisecondes à la date de départ
+    // add ms to J2000.0 date
     std::chrono::time_point<std::chrono::system_clock> j2000_time_point = std::chrono::system_clock::from_time_t(std::mktime(&j2000_time));
     j2000_time_point += std::chrono::milliseconds(816);
 
-    // Calculer la nouvelle date en ajoutant les secondes et les sous-secondes
+    //Calcul the date with secondes and subseconds
     auto newTimePoint = j2000_time_point + std::chrono::seconds(seconds) + std::chrono::milliseconds(subSeconds);
 
     // Afficher la nouvelle date au format UTC
     std::time_t time = std::chrono::system_clock::to_time_t(newTimePoint);
     std::tm timeInfo;
-#ifdef _WIN32  // Sous Windows
+#ifdef _WIN32  //  Windows
     gmtime_s(&timeInfo, &time);
-#else  // Sous Linux
+#else  //  Linux
     gmtime_r(&time, &timeInfo);
 #endif
     std::cout << "Date/Time: " << std::put_time(&timeInfo, "%Y-%m-%d %H:%M:%S") << "."
@@ -64,6 +64,27 @@ void DSHKTelemetryDecoder::showPacket(DS_HkPacket_t packet) {
     std::cout << "StreamId: " << std::dec << ConvertToDecimal(packet.TelemetryHeader.Msg.CCSDS.Pri.StreamId) << std::endl;
     std::cout << "Sequence: " << std::dec << ConvertToDecimal(packet.TelemetryHeader.Msg.CCSDS.Pri.Sequence) << std::endl;
     std::cout << "Length: " << std::dec << ConvertToDecimal(packet.TelemetryHeader.Msg.CCSDS.Pri.Length) << std::endl;
+
+    uint16_t streamID = ConvertToDecimal(packet.TelemetryHeader.Msg.CCSDS.Pri.StreamId);
+    uint16_t sequence = ConvertToDecimal(packet.TelemetryHeader.Msg.CCSDS.Pri.Sequence);
+
+    uint16_t applicationID = streamID & 0x07FF;
+    uint8_t secondaryHeaderPresent = (streamID & 0x0800) >> 11;
+    uint8_t packetType = (streamID & 0x1000) >> 12;
+    uint8_t ccsdsVersion = (streamID & 0xE000) >> 13;
+
+    uint16_t sequenceCount = sequence & 0x3FFF;
+    uint8_t segmentationFlags = (sequence & 0xC000) >> 14;
+
+
+    std::cout << "applicationID: " << static_cast<int>(applicationID) << std::endl;
+    std::cout << "secondaryHeaderPresent: " << static_cast<int>(secondaryHeaderPresent) << std::endl;
+    std::cout << "packetType: " << static_cast<int>(packetType) << std::endl;
+    std::cout << "ccsdsVersion: " << static_cast<int>(ccsdsVersion) << std::endl;
+
+    std::cout << "SequenceCount: " << static_cast<int>(sequenceCount) << std::endl;
+    std::cout << "SegmentationFlags: " << static_cast<int>(segmentationFlags) << std::endl;
+
 
     //Secondary header
     if ((packet.TelemetryHeader.Msg.CCSDS.Pri.StreamId[1] & 0x20) != 0) {
