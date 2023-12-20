@@ -13,7 +13,12 @@ DS application の version は 2.5.1、cFE の version は 6.5.0 とします
 実行環境が Little / Big endianどちらでも動作することを想定してくだ さい。ただし実際に Big Endian の環境で動作させる必要はありません
 ツールの使い方、動作環境の簡単な説明と、実行結果も添付してください
 
-##Compilation :  
+## Environnement :
+- c++11
+- Windows/linux
+ 
+
+## Compilation :  
 Go to the source file directory and then use the makefile to compile the code.  
 The makefile use g++ with c++11.  
 ```
