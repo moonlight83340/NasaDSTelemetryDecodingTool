@@ -96,7 +96,7 @@ void DSHKTelemetryDecoder::showPacket(DS_HkPacket_t packet) {
         std::cout << "Subseconds: " << timeStruct.subSeconds << std::endl;
         std::chrono::time_point<std::chrono::system_clock>  timePoint = 
             getPacketDatestampInUtcTimeFromJ2000Time(timeStruct.seconds, timeStruct.subSeconds);
-        // Afficher la nouvelle date au format UTC
+        // Show date in UTC format
         std::time_t time = std::chrono::system_clock::to_time_t(timePoint);
         std::tm timeInfo = {};
 #ifdef _WIN32  //  Windows
@@ -157,7 +157,6 @@ int DSHKTelemetryDecoder::processBinaryFile() {
         std::cerr << "Can't open File" << std::endl;
         return 1;
     }
-    // Lire les données du fichier dans un vecteur de bytes
     std::vector<unsigned char> buffer(std::istreambuf_iterator<char>(file), {});
     unsigned int fileCursor = 0;
     while (fileCursor < buffer.size()) {
