@@ -10,8 +10,6 @@
 #include <chrono>
 #include <ctime>
 
-
-
 //Telemetry secondary Header Time in J2000 time format
 struct TelemetrySecondaryHeaderTime {
 	uint32_t seconds;
@@ -21,7 +19,7 @@ struct TelemetrySecondaryHeaderTime {
 class DSHKTelemetryDecoder
 {
 public:
-	DSHKTelemetryDecoder(const std::string& filePathp);
+	DSHKTelemetryDecoder(const std::string& filePath);
 	//! Process the binary file to read the HK telemetry
 	/*!
 	  \fn int processBinaryFile()
@@ -46,13 +44,27 @@ public:
 	*/
 	void showPackets();
 private:
-	//Utility function could be from an another file
-	uint16_t ConvertToDecimal(uint8_t bytes[2]);
-	TelemetrySecondaryHeaderTime getTelemetrySecondaryHeaderTime(CFE_MSG_TelemetrySecondaryHeader_t secondaryHeader);
-	std::tm getPacketDatestampInUtcTimeFromJ2000Time(uint32_t seconds, uint16_t subSeconds);
+	//! Show values of all the packets reacded fron the binary file
+	/*!
+	  \fn TelemetrySecondaryHeaderTime 
+	  getTelemetrySecondaryHeaderTime(CFE_MSG_TelemetrySecondaryHeader_t secondaryHeader)
+	  \param secondaryHeader the CFE_MSG_TelemetrySecondaryHeader_t (time stamp of HK telemetry)
+	  \return seconds and subseconds in a struct
+	*/
+	TelemetrySecondaryHeaderTime 
+		getTelemetrySecondaryHeaderTime(CFE_MSG_TelemetrySecondaryHeader_t secondaryHeader);
+	//! Get the packet datestamp in utc time from J2000Time
+	/*!
+	  \fn std::chrono::time_point<std::chrono::system_clock> 
+	  getPacketDatestampInUtcTimeFromJ2000Time(uint32_t seconds, uint16_t subSeconds)
+	  \param seconds packet seconds
+	  \param subseconds packet ms
+	  \return a time point in utc time from J2000Time
+	*/
+	std::chrono::time_point<std::chrono::system_clock> 
+		getPacketDatestampInUtcTimeFromJ2000Time(uint32_t seconds, uint16_t subSeconds);
 
-	std::vector<DS_HkPacket_t> packets;
-	std::string filePath;
-	bool isBigEndian;
+	std::vector<DS_HkPacket_t> _packets;
+	std::string _filePath;
 };
 #endif //DSHK_TELEMETRY_DECODER_H
