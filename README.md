@@ -24,6 +24,7 @@ The makefile use g++ with c++11.
 ```
 make
 ```
+You can also use the visual studio project file to compile.
 
 ## Usage :  
 ```
