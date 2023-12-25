@@ -42,3 +42,7 @@ FilePath is the path to the telemetry binary file.
 ![image](https://github.com/moonlight83340/NasaDSTelemetryDecodingTool/assets/6190795/73ad4e6b-e377-4ced-b8d2-d03419660298)
 
 result.txt contain the result of the command run with the telemetry bin file provided.
+The time calcul in c++ seems to adapt the result with the utc time gap from the system clock.
+I try to check every step of the time calcul, and it seems the gap appear when I add time on the J2000.0 utc time I created before.
+
+I think the issue can be correct on c++20 with utc time but it will not be portable on visual windows.
