@@ -39,10 +39,7 @@ void showBinaryFileInHexa(const std::string& filePath) {
 }
 
 int main(int argc, char* argv[]) {
-    std::string filePath = "C:/Users/gaeta/Documents/GitHub/NasaDSTelemetryDecodingTool/ds_tlm.bin";
-    DSHKTelemetryDecoder DSHKTelemetryDecoder(filePath);
-    DSHKTelemetryDecoder.processBinaryFile();
-    DSHKTelemetryDecoder.showPackets();
+    std::string filePath;
     if (argc < 2) {
         std::cout << "Usage: " << std::endl;
         std::cout << argv[0] << " binary" << " <filepath>" << std::endl;
@@ -51,7 +48,7 @@ int main(int argc, char* argv[]) {
     }
     if (argc >= 2) {
         std::string command = argv[1];
-        /*std::string filePath = argv[2];*/
+        std::string filePath = argv[2];
         if (command == "binary" && argc >= 3) {
             showBinaryFileInHexa(filePath);
         }
@@ -62,9 +59,9 @@ int main(int argc, char* argv[]) {
             else {
                 std::cout << "CPU is big-endian." << std::endl;
             }
-            //DSHKTelemetryDecoder DSHKTelemetryDecoder(filePath);
-            //DSHKTelemetryDecoder.processBinaryFile();
-            //DSHKTelemetryDecoder.showPackets();
+            DSHKTelemetryDecoder DSHKTelemetryDecoder(filePath);
+            DSHKTelemetryDecoder.processBinaryFile();
+            DSHKTelemetryDecoder.showPackets();
         }
         else {
             std::cout << "Unknown command." << std::endl;
