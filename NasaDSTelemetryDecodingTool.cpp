@@ -39,7 +39,6 @@ void showBinaryFileInHexa(const std::string& filePath) {
 }
 
 int main(int argc, char* argv[]) {
-    std::string filePath;
     if (argc < 2) {
         std::cout << "Usage: " << std::endl;
         std::cout << argv[0] << " binary" << " <filepath>" << std::endl;
