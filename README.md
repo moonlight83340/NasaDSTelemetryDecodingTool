@@ -40,3 +40,5 @@ FilePath is the path to the telemetry binary file.
 
 ### Result of ./NasaDSTelemetryDecodingTool run < FilePath >
 ![image](https://github.com/moonlight83340/NasaDSTelemetryDecodingTool/assets/6190795/73ad4e6b-e377-4ced-b8d2-d03419660298)
+
+result.txt contain the result of the command run with the telemetry bin file provided.
