@@ -158,6 +158,7 @@ int DSHKTelemetryDecoder::processBinaryFile() {
         return 1;
     }
     std::vector<unsigned char> buffer(std::istreambuf_iterator<char>(file), {});
+    file.close();
     unsigned int fileCursor = 0;
     while (fileCursor < buffer.size()) {
         DS_HkPacket_t currentPacket{};
@@ -218,6 +219,5 @@ int DSHKTelemetryDecoder::processBinaryFile() {
         }
         _packets.push_back(currentPacket);
     }
-    file.close();
     return 0;
 }
